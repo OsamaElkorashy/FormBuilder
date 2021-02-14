@@ -1,4 +1,8 @@
 <h1>Form Creator</h1><survey-creator></survey-creator>
 
-<h1>Form</h1><survey [json]="json"></survey>
+<h1>Form</h1>
+<survey *ngIf="json" [json]="json"></survey>
 <router-outlet></router-outlet>
+<!-- <div ps-hijri-calender></div> -->
+<app-hijri-calender >
+</app-hijri-calender>

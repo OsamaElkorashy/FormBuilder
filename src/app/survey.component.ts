@@ -34,12 +34,12 @@ Survey.StylesManager.applyTheme("default");
 })
 export class SurveyComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
-  @Input()
-  json: object;
+  @Input() json: object;
   result: any;
 
   ngOnInit() {
     const surveyModel = new Survey.Model(this.json);
+
     surveyModel.onAfterRenderQuestion.add((survey, options) => {
       if (!options.question.popupdescription) {
         return;
@@ -58,9 +58,18 @@ export class SurveyComponent implements OnInit {
       header.appendChild(span);
       header.appendChild(btn);
     });
+    surveyModel.onUploadFiles.add((creator,options)=>{
+      options.files.forEach(element => {
+        debugger
+            if (element.type==options.question.acceptedTypes) {
+              console.log(element);
+            }
+      });
+    });
     surveyModel.onComplete.add((result, options) => {
       this.submitSurvey.emit(result.data);
       this.result = result.data;
+      console.log(result.data);
     });
     Survey.SurveyNG.render("surveyElement", { model: surveyModel });
   }

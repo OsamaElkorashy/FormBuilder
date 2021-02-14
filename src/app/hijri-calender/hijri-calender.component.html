@@ -1,0 +1,16 @@
+<ngb-datepicker class="rtl" #dp (ngModelChange)="change($event)" [(ngModel)]="model" [firstDayOfWeek]="7">
+</ngb-datepicker>
+
+<!-- <input type="text" #dp [firstDayOfWeek]="7" (click)="dp.toggle()" ngbDatepicker [(ngModel)]="model"/> -->
+
+<!-- <form class="form-inline">
+  <div class="form-group">
+    <div class="input-group">
+      <input class="form-control" placeholder="yyyy-mm-dd"
+             name="dp" [(ngModel)]="model" [firstDayOfWeek]="7" ngbDatepicker #dp="ngbDatepicker">
+      <div class="input-group-append">
+        <button class="btn btn-outline-secondary calendar" (click)="dp.toggle()" type="button"></button>
+      </div>
+    </div>
+  </div>
+</form> -->
