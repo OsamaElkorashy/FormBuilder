@@ -39,19 +39,17 @@ export class SurveyComponent implements OnInit {
   @Output() submitSurvey = new EventEmitter<any>();
   @Input() json: object;
   result: any;
+ surveyModel:any;
 constructor(private formService:FormService){}
   ngOnInit() {
-    const surveyModel = new Survey.Model(this.json);
+    this.surveyModel = new Survey.Model(this.json);
     this.formService.Form.subscribe(res=>{
-      this.json =res ;
-      debugger;
-      const surveey = new Survey.Model(this.json);
-      Survey.SurveyNG.render("surveyElement", { model: surveey });
+      this.surveyModel  = new Survey.Model(res);
+      this.render(this.surveyModel)
     })
-    var x =this.json;
-debugger;
-
-
+    this.render(this.surveyModel)
+  }
+  render(surveyModel:any){
     surveyModel.onAfterRenderQuestion.add((survey, options) => {
       if (!options.question.popupdescription) {
         return;
@@ -78,11 +76,12 @@ debugger;
             }
       });
     });
-    surveyModel.onComplete.add((result, options) => {
+  surveyModel.onComplete.add((result, options) => {
+      debugger;
       this.submitSurvey.emit(result.data);
       this.result = result.data;
       console.log(result.data);
     });
-    Survey.SurveyNG.render("surveyElement", { model: surveyModel });
+    Survey.SurveyNG.render("surveyElement", { model: surveyModel  });
   }
 }
