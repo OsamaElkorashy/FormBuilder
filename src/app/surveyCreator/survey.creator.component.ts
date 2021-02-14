@@ -3,7 +3,7 @@ import * as SurveyKo from "survey-knockout";
 import * as SurveyCreator from "survey-creator";
 import * as widgets from "surveyjs-widgets";
 import { init as initCustomWidget } from "../customwidget";
-import { init as initCustomWidget2 } from "../customwidget2";
+import { init as inithijriCalender} from "../hijriCalender";
 import { Survey, surveyStrings } from "survey-angular";
 import {FormService}from "../Services/FormService"
 import {ChangeService}from "../Services/ChangeService"
@@ -22,7 +22,7 @@ widgets.autocomplete(SurveyKo);
 widgets.bootstrapslider(SurveyKo);
 //widgets.emotionsratings(SurveyKo);
 initCustomWidget(SurveyKo);
-
+inithijriCalender(SurveyKo);
 
 
 SurveyCreator.StylesManager.applyTheme("default");
@@ -40,7 +40,6 @@ export class SurveyCreatorComponent implements OnInit{
   @Output() surveySaved: EventEmitter<Object> = new EventEmitter();
   ngOnInit() {
 
-    initCustomWidget2(SurveyKo,this.changeService);
 
 
 
@@ -52,7 +51,8 @@ export class SurveyCreatorComponent implements OnInit{
       "",
       options
     );
-
+    var x = SurveyKo.Serializer.getAllClasses();
+    debugger;
     var inputTab = {
       name: "ay7aga", //the unique tab name
       title: "Inputs", //the tab title,
@@ -79,6 +79,7 @@ export class SurveyCreatorComponent implements OnInit{
     this.surveyCreator.saveSurveyFunc = this.saveMySurvey;
   }
   saveMySurvey = () => {
+    debugger;
     this.formService.Form.next(this.surveyCreator.text);
     this.surveySaved.emit(JSON.parse(this.surveyCreator.text));
   };

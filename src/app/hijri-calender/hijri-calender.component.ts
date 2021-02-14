@@ -41,18 +41,14 @@ export class HijriCalenderComponent implements OnInit {
 @ViewChild('dp',{read:ElementRef})date:ElementRef;
   model: NgbDateStruct;
   value:string;
-  @Output() onChange = new EventEmitter<{}>();
   constructor(private calendar: NgbCalendar,private chaneService:ChangeService) {}
   ngOnInit(): void {
     this.selectToday();
   }
   change(event){
-    this.value = JSON.stringify(event);
-    this.onChange.emit(this.value);
-    this.chaneService.change.next(this.value);
-    console.log(event);
-    debugger;
+    this.date.nativeElement.onchange(event);
   }
+
   selectToday() {
     this.model = this.calendar.getToday();
   }

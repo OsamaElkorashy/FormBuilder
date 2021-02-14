@@ -1,5 +1,4 @@
 import { Component } from '@angular/core';
-import {FormService}from "./Services/FormService"
 
 @Component({
   selector: 'app-root',
@@ -8,13 +7,9 @@ import {FormService}from "./Services/FormService"
 })
 export class AppComponent  {
 json:any = null;
-  constructor(private formService:FormService){}
+  constructor(){}
 
   ngOnInit(): void {
-    this.formService.Form.subscribe(res=>{
-      debugger;
-      this.json =res ;
-    })
   }
   // json =
   //   {

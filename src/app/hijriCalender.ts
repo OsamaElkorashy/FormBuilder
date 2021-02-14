@@ -1,10 +1,11 @@
-export function init(Survey,service) {
-  $ = $ || window.$;
+
+export function init(Survey: any) {
   var widget = {
+
     //the widget name. It should be unique and written in lowcase.
     name: "hijricalender",
     //the widget title. It is how it will appear on the toolbox of the SurveyJS Editor/Builder
-    title: "HijriCalender",
+    title: "Hijri Calender",
     //the name of the icon on the toolbox. We will leave it empty to use the standard one
     iconName: "icon-datepicker",
     //If the widgets depends on third-party library(s) then here you may check if this library(s) is loaded
@@ -31,29 +32,9 @@ export function init(Survey,service) {
       //     name: "placeHolder:string",
       //     category: "general",
       //     defaultValueValue:"ay 7aga"
-      // }];
-      Survey.JsonObject.metaData.addClass(
-        "hijricalender",
-        [
-          { name: "inputType", visible: false },
-          { name: "inputFormat", visible: false },
-          { name: "inputMask", visible: false },
-        ],
-        null,
-        "text"
-      );
-      Survey.JsonObject.metaData.addProperty("hijricalender", {
-        name: "config",
-        category: "general",
-        visible: false,
-        default: null,
-      });
-      // Survey.JsonObject.metaData.addClass(
-      //   "hijricalender",
-      // [],
-      //   null,
-      //   "empty"
-      // );
+      // }]
+      Survey.JsonObject.metaData.addClass("hijricalender", [], null, "empty");
+
 
       //signaturepad is derived from "empty" class - basic question class
       //Survey.JsonObject.metaData.addClass("signaturepad", [], null, "empty");
@@ -70,55 +51,33 @@ export function init(Survey,service) {
     //If you want to use the default question rendering then set this property to true. We do not need any default rendering, we will use our our htmlTemplate
     isDefaultRender: false,
     //You should use it if your set the isDefaultRender to false
-    // htmlTemplate: "<div ps-hijri-calender></div>",
     htmlTemplate: "<hijri-calender></hijri-calender>",
     //The main function, rendering and two-way binding
     afterRender: function (question, el) {
       //el is our root element in htmlTemplate, is "div" in our case
       //get the text element
-      // debugger;
-      // ChangeService.change.next(el);
-      // var date = el.getElementsByTagName("input")[0];
-      var date  = el;
-      // var config = $.extend(true, {}, question.config || {});
-
-      // if (!!question.placeHolder) {
-      //   $el.attr("placeholder", question.placeHolder);
-      // }
-      // debugger;
-      //   config.onSelect = function (dateText) {
-      //     question.value = dateText;
-      // }
+      var text = el.getElementsByTagName("input")[0];
       //set some properties
-      //text.inputType = question.inputType;
       // text.placeholder = question.placeHolder;
       //get button and set some rpoeprties
+
       //set the changed value into question value
-      service.change.subscribe(value=>{
-        debugger;
-        question.value = value
-      })
-      // date.onSelect = function (dateText) {
+        text.onchange = function () {
+          debugger;
+          question.value = text.value;
+        };
+      // text.onblur = function () {
       //   debugger;
-      //   question.value = dateText;
+      //   question.value = text.value;
       // };
-      // date.ngModelChange = function () {
-      //   debugger;
-      //   question.value = date.value;
-      // };
-      date.onchange = function () {
-        debugger;
-        question.value = date.value;
-      };
-      debugger;
       var onValueChangedCallback = function () {
-        date.value = question.value ? question.value : "";
+        text.value = question.value ? question.value : "";
       };
       var onReadOnlyChangedCallback = function () {
         if (question.isReadOnly) {
-          el.setAttribute("disabled", "disabled");
+          text.setAttribute("disabled", "disabled");
         } else {
-          el.removeAttribute("disabled");
+          text.removeAttribute("disabled");
         }
       };
       //if question becomes readonly/enabled add/remove disabled attribute

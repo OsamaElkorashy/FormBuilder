@@ -1,4 +1,3 @@
-import { surveyCss } from "survey-angular";
 
 export function init(Survey: any) {
   var widget = {
