@@ -1,7 +1,12 @@
-<h1>Form Creator</h1><survey-creator></survey-creator>
-
+ <h1>Form Creator</h1><survey-creator></survey-creator>
+<!--
 <h1>Form</h1>
 <survey [json]="json"></survey>
 <router-outlet></router-outlet>
-<!-- <app-hijri-calender >
+<app-hijri-calender >
 </app-hijri-calender> -->
+<div class="container">
+ <app-table (valueChange) = "addItem($event)"></app-table>
+<my-table (valueChange) = "addItem($event)" mydata={{data}}></my-table>
+<!-- <hijri-calender></hijri-calender> -->
+</div>

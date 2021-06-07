@@ -7,9 +7,18 @@ import { Component } from '@angular/core';
 })
 export class AppComponent  {
 json:any = null;
+data:string;
   constructor(){}
 
   ngOnInit(): void {
+          this.data   = JSON.stringify([{id:"addded",name:"ljlkjlj",data:"jlkljklj"},
+      {id:"addded",name:"ljlkjlj",data:"jlkljklj"},
+      {id:"addded",name:"ljlkjlj",data:"jlkljklj"}])
+      console.log(this.data);
+  }
+  addItem(event){
+    debugger;
+    console.log(event);
   }
   // json =
   //   {

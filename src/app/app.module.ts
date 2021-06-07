@@ -8,9 +8,10 @@ import { SurveyCreatorComponent } from './surveyCreator/survey.creator.component
 import { NgbModule,NgbCalendarIslamicUmalqura } from '@ng-bootstrap/ng-bootstrap';
 import { HijriCalenderComponent } from './hijri-calender/hijri-calender.component';
 import { HijriCalenderDirective } from './hijri-calender-directive';
-import { FormsModule } from '@angular/forms';
-import  { Injector} from '@angular/core';
+import { FormsModule,ReactiveFormsModule } from '@angular/forms';
+import  { Injector ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import  { createCustomElement } from '@angular/elements';
+import {TableComponent} from './table/table.component'
 
 @NgModule({
   declarations: [
@@ -18,23 +19,32 @@ import  { createCustomElement } from '@angular/elements';
     SurveyComponent,
     SurveyCreatorComponent,
     HijriCalenderComponent,
-    HijriCalenderDirective
+    HijriCalenderDirective,
+    TableComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     NgbModule,
-    FormsModule
+    FormsModule,
+    ReactiveFormsModule
   ],
   providers: [],
   entryComponents :  [
-    HijriCalenderComponent
+    HijriCalenderComponent,
+    TableComponent
  ],
-  bootstrap: [AppComponent]
+  bootstrap: [AppComponent],
+  schemas: [
+    CUSTOM_ELEMENTS_SCHEMA
+  ]
 })
 export class AppModule {
   constructor(private injector : Injector){
     const HijriCalender = createCustomElement(HijriCalenderComponent, {injector : this.injector});
     customElements.define('hijri-calender',HijriCalender);
+
+    const Table = createCustomElement(TableComponent, {injector : this.injector});
+    customElements.define('my-table',Table);
   }
  }

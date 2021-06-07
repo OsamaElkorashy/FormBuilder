@@ -4,6 +4,7 @@ import * as SurveyCreator from "survey-creator";
 import * as widgets from "surveyjs-widgets";
 import { init as initCustomWidget } from "../customwidget";
 import { init as inithijriCalender} from "../hijriCalender";
+import { init as initTable} from "../MyTable";
 import { Survey, surveyStrings } from "survey-angular";
 import {FormService}from "../Services/FormService"
 import {ChangeService}from "../Services/ChangeService"
@@ -23,6 +24,7 @@ widgets.bootstrapslider(SurveyKo);
 //widgets.emotionsratings(SurveyKo);
 initCustomWidget(SurveyKo);
 inithijriCalender(SurveyKo);
+initTable(SurveyKo);
 
 
 SurveyCreator.StylesManager.applyTheme("default");
@@ -39,10 +41,6 @@ export class SurveyCreatorComponent implements OnInit{
   @Input() json: any;
   @Output() surveySaved: EventEmitter<Object> = new EventEmitter();
   ngOnInit() {
-
-
-
-
     surveyStrings.loadingSurvey;
     let options = { showEmbededSurveyTab: true, generateValidJSON: true,
       questionTypes: []};
@@ -58,7 +56,7 @@ export class SurveyCreatorComponent implements OnInit{
       title: "Inputs", //the tab title,
       template: "custom-inputs-tab",
       action: ()=>{
-        inputTab.data.body  = this.ay7aga(this.surveyCreator);
+        inputTab.data.body  = this.GetInputs(this.surveyCreator);
         var currentCreatorText = this.surveyCreator.text;
         this.surveyCreator.render("surveyCreatorContainer");
         this.surveyCreator.text =  currentCreatorText;
@@ -78,12 +76,15 @@ export class SurveyCreatorComponent implements OnInit{
     this.surveyCreator.text = JSON.stringify(this.json);
     this.surveyCreator.saveSurveyFunc = this.saveMySurvey;
   }
+
   saveMySurvey = () => {
     debugger;
     this.formService.Form.next(this.surveyCreator.text);
     this.surveySaved.emit(JSON.parse(this.surveyCreator.text));
   };
-  ay7aga(surveyCreator: SurveyCreator.SurveyCreator):string{
+
+
+  GetInputs(surveyCreator: SurveyCreator.SurveyCreator):string{
     var result = {elements:[]};
     var x = JSON.parse(surveyCreator.text);
     if (x.pages) {
@@ -95,8 +96,6 @@ export class SurveyCreatorComponent implements OnInit{
         }
       });
     }
-
-
    var stringfiedResult  = JSON.stringify(result);
     return stringfiedResult;
   }
