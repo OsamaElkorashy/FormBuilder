@@ -1,7 +1,7 @@
 import { Component, Input, EventEmitter, Output, OnInit } from "@angular/core";
 import * as Survey from "survey-angular";
 import * as widgets from "surveyjs-widgets";
-
+import { init as initTable} from "./MyTable";
 import { init as initCustomWidget } from "./customwidget";
 import { init as inithijriCalender} from "./hijriCalender";
 import {FormService}from "./Services/FormService"
@@ -22,6 +22,7 @@ widgets.prettycheckbox(Survey);
 //widgets.emotionsratings(Survey);
 initCustomWidget(Survey);
 inithijriCalender(Survey);
+initTable(Survey)
 
 //Survey.JsonObject.metaData.addProperty("questionbase", "popupdescription:text");
 //Survey.JsonObject.metaData.addProperty("page", "popupdescription:text");
@@ -42,7 +43,9 @@ export class SurveyComponent implements OnInit {
   surveyModel:any;
 constructor(private formService:FormService){}
   ngOnInit() {
-    this.surveyModel = new Survey.Model(this.json);
+    var x ={"elements":[{"type":"mytable","name":"question1"}]};
+    this.surveyModel = new Survey.Model(x);
+    this.surveyModel.data = {"question1": "[{\"id\":\"1\",\"name\":\"ljlkjlj\",\"type\":\"jlkljklj\",\"side\":\"jlkljklj\",\"insideJob\":\"jlkljklj\",\"outsideJob\":\"jlkljklj\"}]"}
     this.formService.Form.subscribe(res=>{
       this.surveyModel  = new Survey.Model(res);
       this.render(this.surveyModel)
@@ -68,10 +71,9 @@ constructor(private formService:FormService){}
       header.appendChild(span);
       header.appendChild(btn);
     });
-    
+
     surveyModel.onUploadFiles.add((creator,options)=>{
       options.files.forEach(element => {
-        debugger
             if (element.type==options.question.acceptedTypes) {
               console.log(element);
             }

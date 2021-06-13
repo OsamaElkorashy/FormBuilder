@@ -8,13 +8,46 @@ import { Component } from '@angular/core';
 export class AppComponent  {
 json:any = null;
 data:string;
+formTemplateInput:any;
   constructor(){}
 
   ngOnInit(): void {
-          this.data   = JSON.stringify([{id:"addded",name:"ljlkjlj",data:"jlkljklj"},
-      {id:"addded",name:"ljlkjlj",data:"jlkljklj"},
-      {id:"addded",name:"ljlkjlj",data:"jlkljklj"}])
-      console.log(this.data);
+    this.formTemplateInput = JSON.stringify([{
+      header:"Name",
+      fieldId:"Name",
+      fieldName:"Name",
+      fieldType:"date",
+      validators:[{name:"required"},{name:"min",value:"today"}]
+    },
+    // {
+    //   header:"type",
+    //   fieldId:"type",
+    //   fieldName:"type",
+    //   fieldType:"text",
+    //   required:true
+    // },
+    // {
+    //   header:"side",
+    //   fieldId:"side",
+    //   fieldName:"side",
+    //   fieldType:"text",
+    //   validator:["Validators.required"]
+    // },
+    // {
+    //   header:"insideJob",
+    //   fieldId:"insideJob",
+    //   fieldName:"insideJob",
+    //   fieldType:"text",
+    //   required:true
+    // },
+    // {
+    //   header:"outsideJob",
+    //   fieldId:"outsideJob",
+    //   fieldName:"outsideJob",
+    //   fieldType:"text",
+    //   required:true
+    // }
+  ]);
   }
   addItem(event){
     debugger;

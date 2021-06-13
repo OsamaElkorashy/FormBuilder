@@ -42,7 +42,7 @@ export function init(Survey: any) {
       //Add new property(s)
       var x =
       Survey.JsonObject.metaData.addProperties("mytable", [
-        { name: "mydata", default: "[{\"id\":\"addded\",\"name\":\"ljlkjlj\",\"data\":\"jlkljklj\"},{\"id\":\"addded\",\"name\":\"ljlkjlj\",\"data\":\"jlkljklj\"},{\"id\":\"addded\",\"name\":\"ljlkjlj\",\"data\":\"jlkljklj\"}]" ,category: "general"},
+        { name: "mydata", default: "[]" ,category: "general"},
       ]);
       //For more information go to https://surveyjs.io/Examples/Builder/?id=addproperties#content-docs
 
@@ -57,11 +57,9 @@ export function init(Survey: any) {
     afterRender: function (question, el) {
       //el is our root element in htmlTemplate, is "div" in our case
       //get the text element
-      debugger;
       var inputsList = el.getElementsByTagName("input");
       var text = inputsList[inputsList.length-1];
       text.onchange = function () {
-        debugger;
         question.value =el.mydata;
       };
       el.setAttribute("mydata",question.mydata )
@@ -77,7 +75,8 @@ export function init(Survey: any) {
       //   question.value = text.value;
       // };
       var onValueChangedCallback = function () {
-        text.value = question.value ? question.value : [];
+        el.mydata = question.value ? question.value : "";
+        //text.value = question.value ? question.value : [];
       };
       var onReadOnlyChangedCallback = function () {
         if (question.isReadOnly) {

@@ -11,7 +11,9 @@ import { HijriCalenderDirective } from './hijri-calender-directive';
 import { FormsModule,ReactiveFormsModule } from '@angular/forms';
 import  { Injector ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import  { createCustomElement } from '@angular/elements';
-import {TableComponent} from './table/table.component'
+import {TableComponent} from './table/table.component';
+import { CommonTableComponent } from './common-table/common-table.component';
+import { CommonTableReactiveComponent } from './common-table-reactive/common-table-reactive.component'
 
 @NgModule({
   declarations: [
@@ -20,7 +22,9 @@ import {TableComponent} from './table/table.component'
     SurveyCreatorComponent,
     HijriCalenderComponent,
     HijriCalenderDirective,
-    TableComponent
+    TableComponent,
+    CommonTableComponent,
+    CommonTableReactiveComponent
   ],
   imports: [
     BrowserModule,
@@ -32,7 +36,9 @@ import {TableComponent} from './table/table.component'
   providers: [],
   entryComponents :  [
     HijriCalenderComponent,
-    TableComponent
+    TableComponent,
+    CommonTableReactiveComponent,
+    CommonTableComponent
  ],
   bootstrap: [AppComponent],
   schemas: [
@@ -46,5 +52,11 @@ export class AppModule {
 
     const Table = createCustomElement(TableComponent, {injector : this.injector});
     customElements.define('my-table',Table);
+
+    const TableReactive = createCustomElement(CommonTableReactiveComponent, {injector : this.injector});
+    customElements.define('my-reactive-table',TableReactive);
+
+    const TableCommon = createCustomElement(CommonTableComponent, {injector : this.injector});
+    customElements.define('my-common-table',TableCommon);
   }
  }

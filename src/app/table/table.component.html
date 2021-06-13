@@ -1,25 +1,56 @@
-  <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="search()">
-  <input required class="form-control col-5"/>
-  <input required type="date" max="{{date | date:'yyyy-MM-dd'}}" class="form-control col-5"/>
 
-  <button type="Submit" class="form-control btn btn-primary col-2">search</button>
-  </form>
-
-
+<button (click)="modalClosed=false" class="btn btn-primary">Create New</button>
 <table class="table">
   <thead>
     <tr>
+      <th> index </th>
       <th *ngFor="let header of headers"> {{header}} </th>
+      <th></th>
     </tr>
   </thead>
   <tbody *ngIf="dataSource.length!=0">
-    <tr *ngFor="let row of dataSource">
+    <tr *ngFor="let row of dataSource;let i = index">
+      <td > {{i+1}} </td>
       <td *ngFor="let header of headers"> {{row[header]}} </td>
-      <td (click)="delete(row)" style="cursor: pointer;">delete</td>
+      <td>
+        <span class="p-2" (click)="edit(row,i)" style="cursor: pointer;">edit</span>
+        <span class="p-2" (click)="delete(i)" style="cursor: pointer;">delete</span>
+      </td>
     </tr>
   </tbody>
   <tbody *ngIf="dataSource.length==0">
-    There are no data to show
+    <tr>
+      <td colspan="3" class="text-center ">
+        There are no data to show
+      </td>
+    </tr>
   </tbody>
 </table>
+
+<!-- The Modal -->
+<div class="modal" [ngStyle]="{'display': modalClosed?'none':'block'}">
+  <!-- Modal content -->
+  <div class="modal-content">
+    <span (click)="modalClosed=true" class="close">&times;</span>
+    <form class="form-inline" [formGroup]="searchForm" (ngSubmit)="search()">
+      <input  formControlName="regestrationNumber" class="form-control col-5"/>
+      <input  formControlName="regestrationDate" type="date" max="{{date | date:'yyyy-MM-dd'}}" class="form-control col-5"/>
+
+      <button type="Submit" class="form-control btn btn-primary col-2">search</button>
+    </form>
+    <form class="form" [formGroup]="dataForm" (ngSubmit)="isEditMode?editRow():addRow()">
+      <label for="name" class="col-2">name</label>
+      <input id="name"  formControlName="name" class="form-control col-offset-2 col-8"/>
+      <label for="type" class="col-2">type</label>
+      <input id="type" formControlName="type" class="form-control col-offset-2 col-8"/>
+      <label for="side"class="col-2">side</label>
+      <input id="side" formControlName="side" class="form-control col-offset-2 col-8"/>
+      <label for="insideJob"class="col-2">insideJob</label>
+      <input id="insideJob" formControlName="insideJob" class="form-control col-offset-2 col-8"/>
+      <label for="outsideJob"class="col-2">outsideJob</label>
+      <input id="outsideJob" formControlName="outsideJob" class="form-control col-offset-2 col-8"/>
+      <button type="Submit" class="form-control btn btn-primary col-2">{{isEditMode?"Edit Row":"Add Row"}}</button>
+    </form>
+  </div>
+</div>
 <input type="hidden" name="" #hidden>

@@ -1,12 +1,27 @@
- <h1>Form Creator</h1><survey-creator></survey-creator>
-<!--
-<h1>Form</h1>
-<survey [json]="json"></survey>
-<router-outlet></router-outlet>
-<app-hijri-calender >
-</app-hijri-calender> -->
+ <!-- <h1>Form Creator</h1><survey-creator></survey-creator> -->
+
+<!--<h1>Form</h1>
+
+<router-outlet></router-outlet> -->
+
 <div class="container">
- <app-table (valueChange) = "addItem($event)"></app-table>
-<my-table (valueChange) = "addItem($event)" mydata={{data}}></my-table>
+<!-- <app-table></app-table> -->
+ <!-- <my-table (valueChange) = "addItem($event)" mydata={{data}}></my-table> -->
+<!-- <survey></survey> -->
 <!-- <hijri-calender></hijri-calender> -->
 </div>
+
+
+<!-- <app-hijri-calender >
+</app-hijri-calender> -->
+
+<!-- <div class="container">
+<app-common-table formTemplateInput ={{formTemplateInput}}></app-common-table>
+</div> -->
+
+<div class="container">
+  <!-- <app-common-table-reactive formTemplateInput ={{formTemplateInput}}></app-common-table-reactive> -->
+
+  <my-reactive-table formTemplateInput ={{formTemplateInput}}></my-reactive-table>
+  <!-- <my-common-table formTemplateInput ={{formTemplateInput}}></my-common-table> -->
+  </div>
