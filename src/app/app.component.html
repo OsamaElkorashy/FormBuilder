@@ -22,6 +22,13 @@
 <div class="container">
   <!-- <app-common-table-reactive formTemplateInput ={{formTemplateInput}}></app-common-table-reactive> -->
 
-  <my-reactive-table formTemplateInput ={{formTemplateInput}}></my-reactive-table>
+  <!-- <my-reactive-table formTemplateInput ={{formTemplateInput}}></my-reactive-table> -->
   <!-- <my-common-table formTemplateInput ={{formTemplateInput}}></my-common-table> -->
+
+
+<form [formGroup]="testForm" >
+  <app-natinality-idnumber-component formControlName="testValue"></app-natinality-idnumber-component>
+  <app-form-buttons [disabledButtons] = "{cancel:true}" (Save)="onsubmit()"></app-form-buttons>
+</form>
+
   </div>

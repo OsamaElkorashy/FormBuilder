@@ -1,0 +1,6 @@
+<div class="col-12">
+  <button [disabled] = "disabledButtons.initialSave" (click)="InitialSave.emit()" class="btn btn-primary">{{initialSaveText}}</button>
+  <button [disabled] = "disabledButtons.save" (click)="Save.emit()" class="btn btn-primary">{{saveText}}</button>
+  <button [disabled] = "disabledButtons.cancel" (click)="Cancel.emit()" class="btn btn-info">{{cancelText}}</button>
+  <button [disabled] = "disabledButtons.delete" (click)="Delete.emit()" class="btn btn-danger">{{deleteText}}</button>
+</div>

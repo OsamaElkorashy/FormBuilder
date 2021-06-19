@@ -13,7 +13,9 @@ import  { Injector ,CUSTOM_ELEMENTS_SCHEMA} from '@angular/core';
 import  { createCustomElement } from '@angular/elements';
 import {TableComponent} from './table/table.component';
 import { CommonTableComponent } from './common-table/common-table.component';
-import { CommonTableReactiveComponent } from './common-table-reactive/common-table-reactive.component'
+import { CommonTableReactiveComponent } from './common-table-reactive/common-table-reactive.component';
+import { NatinalityIDnumberComponentComponent } from './natinality-idnumber-component/natinality-idnumber-component.component';
+import { FormButtonsComponent } from './form-buttons/form-buttons.component'
 
 @NgModule({
   declarations: [
@@ -24,7 +26,9 @@ import { CommonTableReactiveComponent } from './common-table-reactive/common-tab
     HijriCalenderDirective,
     TableComponent,
     CommonTableComponent,
-    CommonTableReactiveComponent
+    CommonTableReactiveComponent,
+    NatinalityIDnumberComponentComponent,
+    FormButtonsComponent
   ],
   imports: [
     BrowserModule,

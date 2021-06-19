@@ -1,0 +1,6 @@
+
+  <label for="text"></label>
+  <input #name id="text" (blur)="ontouched()"  [disabled]="disabled" (keyup)="change({name:name.value,number:number.value})" type="text" [value]="myvalue?.name">
+  <label for="number"></label>
+  <input #number (blur)="ontouched()" [disabled]="disabled" id="number" (change)="change({name:name.value,number:number.value})" type="number" [value]="myvalue?.number">
+

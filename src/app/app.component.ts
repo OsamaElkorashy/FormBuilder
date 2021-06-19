@@ -1,4 +1,6 @@
 import { Component } from '@angular/core';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
+import { value } from './natinality-idnumber-component/natinality-idnumber-component.component';
 
 @Component({
   selector: 'app-root',
@@ -8,46 +10,55 @@ import { Component } from '@angular/core';
 export class AppComponent  {
 json:any = null;
 data:string;
+testForm:FormGroup;
 formTemplateInput:any;
   constructor(){}
 
   ngOnInit(): void {
-    this.formTemplateInput = JSON.stringify([{
-      header:"Name",
-      fieldId:"Name",
-      fieldName:"Name",
-      fieldType:"date",
-      validators:[{name:"required"},{name:"min",value:"today"}]
-    },
-    // {
-    //   header:"type",
-    //   fieldId:"type",
-    //   fieldName:"type",
-    //   fieldType:"text",
-    //   required:true
-    // },
-    // {
-    //   header:"side",
-    //   fieldId:"side",
-    //   fieldName:"side",
-    //   fieldType:"text",
-    //   validator:["Validators.required"]
-    // },
-    // {
-    //   header:"insideJob",
-    //   fieldId:"insideJob",
-    //   fieldName:"insideJob",
-    //   fieldType:"text",
-    //   required:true
-    // },
-    // {
-    //   header:"outsideJob",
-    //   fieldId:"outsideJob",
-    //   fieldName:"outsideJob",
-    //   fieldType:"text",
-    //   required:true
-    // }
-  ]);
+this.testForm = new FormGroup({
+  testValue : new FormControl({value:{name:"Osama",number:5},disabled:false},Validators.required)
+})
+
+  //   this.formTemplateInput = JSON.stringify([{
+  //     header:"Name",
+  //     fieldId:"Name",
+  //     fieldName:"Name",
+  //     fieldType:"date",
+  //     required:true
+  //   },
+  //   {
+  //     header:"type",
+  //     fieldId:"type",
+  //     fieldName:"type",
+  //     fieldType:"text",
+  //     required:true
+  //   },
+  //   {
+  //     header:"side",
+  //     fieldId:"side",
+  //     fieldName:"side",
+  //     fieldType:"text",
+  //     required:true
+  //   },
+  //   {
+  //     header:"insideJob",
+  //     fieldId:"insideJob",
+  //     fieldName:"insideJob",
+  //     fieldType:"text",
+  //     required:true
+  //   },
+  //   {
+  //     header:"outsideJob",
+  //     fieldId:"outsideJob",
+  //     fieldName:"outsideJob",
+  //     fieldType:"text",
+  //     required:true
+  //   }
+  // ]);
+  }
+
+  onsubmit(){
+    console.log(this.testForm);
   }
   addItem(event){
     debugger;
